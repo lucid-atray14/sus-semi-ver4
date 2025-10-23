@@ -1368,6 +1368,7 @@ def main():
                                 results = pd.DataFrame({
                                     'Material': df_filtered['Name'].values,
                                     'Bandgap (eV)': df_filtered['Bandgap'].values,
+                                    'DOI': df_filtered['DOI'].values,
                                     'Score': scores
                                 }).sort_values('Score', ascending=False).reset_index(drop=True)
                                 
@@ -1404,11 +1405,16 @@ def main():
                     
                     # Display results
                     st.subheader("MCDM Results")
+
+                    # Define columns to display
+                    display_cols = ['Rank', 'Material', 'Bandgap (eV)', 'DOI', 'Score']
+                    # Only include columns that exist in the results dataframe
+                    display_cols = [col for col in display_cols if col in results.columns]
+
                     st.dataframe(
-                        results.style.format({
+                        results[display_cols].style.format({
                             'Bandgap (eV)': '{:.2f}',
-                            'Score': '{:.4f}',
-                            'Net Flow': '{:.4f}'
+                            'Score': '{:.4f}'
                         }),
                         use_container_width=True
                     )
