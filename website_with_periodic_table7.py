@@ -1411,8 +1411,12 @@ def main():
                     # Only include columns that exist in the results dataframe
                     display_cols = [col for col in display_cols if col in results.columns]
 
+                    # Show only top 100 results to keep it manageable
+                    top_n = 100
+                    st.write(f"Showing top {top_n} results (out of {len(results)} total)")
+
                     st.dataframe(
-                        results[display_cols].style.format({
+                        results[display_cols].head(top_n).style.format({
                             'Bandgap (eV)': '{:.2f}',
                             'Score': '{:.4f}'
                         }),
