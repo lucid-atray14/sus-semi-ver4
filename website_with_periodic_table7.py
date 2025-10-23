@@ -551,7 +551,7 @@ def main():
                 # Ensure we only render up to 9 panels
                 top9 = top_names[:9]
 
-                fig, axes = plt.subplots(nrows=3, ncols=3, figsize=(12, 10), sharex=True, sharey=True)
+                fig, axes = plt.subplots(nrows=3, ncols=3, figsize=(12, 10), sharex=True)
                 axes = axes.flatten()
 
                 for i, name in enumerate(top9):
@@ -563,6 +563,8 @@ def main():
                         if sub.size >= 2:
                             # Median guide
                             ax.axvline(np.median(sub), linestyle="--", linewidth=1)
+                        # Set logarithmic scale for y-axis
+                        ax.set_yscale('log')
                     else:
                         ax.text(0.5, 0.5, "No data", ha="center", va="center",
                                 transform=ax.transAxes, fontsize=9, alpha=0.7)
@@ -577,9 +579,8 @@ def main():
                 for j in range(len(top9), 9):
                     axes[j].axis("off")
 
-                fig.supylabel("Count")
+                fig.supylabel("Count (log scale)")
                 fig.supxlabel("Bandgap (eV)")
-                #fig.suptitle("Bandgap Histograms — Top 9 Materials", fontsize=13)
                 fig.tight_layout(rect=[0, 0.02, 1, 0.95])
 
                 st.pyplot(fig, clear_figure=True)
@@ -657,8 +658,7 @@ def main():
             df2_plot = df2_filtered.sort_values('Date').copy()
             df2_plot['Label'] = df2_plot['Name'].astype(str)
             rng = np.random.default_rng(42)
-            #df2_plot['show_label'] = rng.random(len(df2_plot)) < label_fraction
-            df2_plot['show_label'] = rng.random(len(df2_plot)) < 0.25
+            df2_plot['show_label'] = rng.random(len(df2_plot)) < 0.025
 
             # --- Plot ---
             fig, ax = plt.subplots(figsize=(9, 6))
