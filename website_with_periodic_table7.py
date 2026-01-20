@@ -535,7 +535,7 @@ def main():
                                 p,
                                 use_container_width=True,
                                 theme="streamlit",
-                                key="professional_graph"
+                                key="bandgap_info_scatter_plot"
                             )
 
         st.markdown("***Histogram plot shows the frequency distribution of bandgaps. It offers quantitative information regarding central tendency and data concentration.***")
@@ -1075,7 +1075,7 @@ def main():
                 streamlit_bokeh(p,
                                 use_container_width=True,
                                 theme="streamlit",
-                                key="professional_graph"
+                                key="decision_making_scatter_plot"
                             )
             else:
                 st.warning("⚠️ No materials match the current filters")
