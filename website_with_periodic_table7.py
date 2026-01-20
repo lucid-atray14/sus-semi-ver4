@@ -531,7 +531,12 @@ def main():
                 p.ygrid.visible = False
                 p.outline_line_color = None
 
-                streamlit_bokeh(p, key="professional_graph")
+                streamlit_bokeh(
+                                p,
+                                use_container_width=True,
+                                theme="streamlit",
+                                key="professional_graph"
+                            )
 
         st.markdown("***Histogram plot shows the frequency distribution of bandgaps. It offers quantitative information regarding central tendency and data concentration.***")
 
@@ -1067,7 +1072,11 @@ def main():
                 p = create_professional_plot(
                     df_filtered, x_col, y_col, plot_title, x_col, y_col, False, log_y
                 )
-                streamlit_bokeh(p, key="professional_plot")
+                streamlit_bokeh(p,
+                                use_container_width=True,
+                                theme="streamlit",
+                                key="professional_graph"
+                            )
             else:
                 st.warning("⚠️ No materials match the current filters")
 
